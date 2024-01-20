@@ -35,21 +35,6 @@ class Documentos(BaseEntity):
         self.clienteol = clienteol
 
 
-class Productos(BaseEntity):
-    __tablename__ = 'productos'
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String)
-    precio = db.Column(db.Integer)
-    descripcion = db.Column(db.String)
-    categoria_id = db.Column(db.Integer)
-
-
-class Categorias(BaseEntity):
-    __tablename__ = 'categorias'
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String)
-
-
 class Ofertas(BaseEntity):
     __tablename__ = 'ofertas'
     id = db.Column(db.Integer, primary_key=True)
@@ -115,3 +100,14 @@ class ArticulosWeb(BaseEntity):
     da = db.Column(db.String(255))
     de = db.Column(db.String(255))
     foto = db.Column(db.String(255))
+
+
+class CategoriaWeb(BaseEntity):
+    __tablename__ = 'categoriaweb'
+    id = db.Column(db.Integer, primary_key=True)
+    categoria = db.Column(db.Integer)
+    nombre = db.Column(db.String(255))
+    orden = db.Column(db.Integer)
+    padre = db.Column(db.Integer)
+    articulos = db.Column(db.Integer)
+    imagen = db.Column(db.String(255))

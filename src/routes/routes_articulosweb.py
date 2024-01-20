@@ -20,16 +20,12 @@ def obtener_articulosweb():
 @articulos_web_bp.route('/articuloswebsearch', methods=['GET'])
 def obtener_art_search():
     parametros = request.args
-    categoria = parametros.get('categoria')
     search = parametros.get('s')
-    rangoregistros = parametros.get('rangoregistros')
-    sucursal = parametros.get('sucursal')
-    ofertas = parametros.get('ofertas')
 
-    if not search:
-        return {'mensaje': "Debe ingresar el parametros 's' para buscar el articulo"}, 400
+    if search is None:
+        return {'mensaje': f"Debe ingresar el parametros 's' para buscar el articulo/s"}, 400
 
-    articulos_search = controller_articulosweb().obtener_con_filtro(search)
+    articulos_search = controller_articulosweb().obtener_articulos_search(search)
     articulo_data = []
     for art in articulos_search:
         at = art.serialize()

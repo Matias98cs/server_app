@@ -1,15 +1,14 @@
-from src.models.entities import ArticulosWeb
+from src.models.entities import ArticulosWeb, CategoriaWeb, Ofertas
 
 
 class controller_articulosweb():
     def __init__(self):
         super().__init__()
 
-    def obtener_con_filtro(self, descripcion):
+    def obtener_articulos_search(self, search):
         query = ArticulosWeb.query
 
-        if descripcion:
-            query = query.filter(
-                ArticulosWeb.descripcion.ilike(f"%{descripcion}%"))
+        query = query.filter(
+            ArticulosWeb.descripcion.ilike(f"%{search}%"))
 
-        return query.all() if descripcion else []
+        return query
