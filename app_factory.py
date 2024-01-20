@@ -8,6 +8,7 @@ from src.routes.routes_articulosweb import articulos_web_bp
 from src.routes.routes_categoriasweb import categorias_web_bp
 from src.routes.routes_ofertas import ofertas_bp
 from src.routes.routes_promociones import promociones_bp
+from src.routes.routes_error import error_bp
 
 
 def create_app():
@@ -22,6 +23,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    app.register_blueprint(error_bp)
     app.register_blueprint(articulos_web_bp)
     app.register_blueprint(categorias_web_bp)
     app.register_blueprint(ofertas_bp)
