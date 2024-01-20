@@ -14,7 +14,9 @@ def obtener_articulosweb():
         at = art.serialize()
         articulos_data.append(at)
 
-    return {'articulos': articulos_data}, 200
+    response = make_response({"articulos": articulos_data}, 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 
 @articulos_web_bp.route('/articuloswebsearch', methods=['GET'])
@@ -31,4 +33,6 @@ def obtener_art_search():
         at = art.serialize()
         articulo_data.append(at)
 
-    return {'articulo': articulo_data}
+    response = make_response({"articulo": articulo_data}, 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
