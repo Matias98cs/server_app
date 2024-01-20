@@ -36,3 +36,22 @@ def obtener_art_search():
     response = make_response({"articulo": articulo_data}, 200)
     response.headers['Content-Type'] = 'application/json'
     return response
+
+
+@articulos_web_bp.route('/articulos-web/<search>', methods=['GET'])
+def obtener_articulo_query(search):
+    if not search:
+        response = make_response(
+            {"msj": 'Debe ingresa un nombre o descripcion para buscar el articulo'}, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+    articulos_search = controller_articulosweb().obtener_articulos_search(search)
+    articulo_data = []
+    for art in articulos_search:
+        at = art.serialize()
+        articulo_data.append(at)
+
+    response = make_response({"articulo": articulo_data}, 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
