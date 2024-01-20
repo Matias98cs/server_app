@@ -7,6 +7,7 @@ from src.models.base import db
 from src.routes.routes_articulosweb import articulos_web_bp
 from src.routes.routes_categoriasweb import categorias_web_bp
 from src.routes.routes_ofertas import ofertas_bp
+from src.routes.routes_promociones import promociones_bp
 
 
 def create_app():
@@ -24,5 +25,6 @@ def create_app():
     app.register_blueprint(articulos_web_bp)
     app.register_blueprint(categorias_web_bp)
     app.register_blueprint(ofertas_bp)
+    app.register_blueprint(promociones_bp)
 
     return app
