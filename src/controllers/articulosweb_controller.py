@@ -1,4 +1,4 @@
-from src.models.entities import ArticulosWeb, CategoriaWeb, Ofertas
+from src.models.entities import ArticulosWeb
 
 
 class controller_articulosweb():
@@ -11,4 +11,9 @@ class controller_articulosweb():
         query = query.filter(
             ArticulosWeb.descripcion.ilike(f"%{search}%"))
 
+        return query
+
+    def obtener_art_home(self):
+        query = ArticulosWeb.query.with_entities(
+            ArticulosWeb.descripcion, ArticulosWeb.foto, ArticulosWeb.precio, ArticulosWeb.id)
         return query
