@@ -19,7 +19,7 @@ def obtener_articulosweb():
     return response
 
 
-@articulos_web_bp.route('/articuloswebsearch', methods=['GET'])
+@articulos_web_bp.route('/articulosweb-search', methods=['GET'])
 def obtener_art_search():
     parametros = request.args
     search = parametros.get('s')
@@ -53,5 +53,19 @@ def obtener_articulo_query(search):
         articulo_data.append(at)
 
     response = make_response({"articulo": articulo_data}, 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
+
+
+@articulos_web_bp.route('/articulos-web-home', methods=['GET'])
+def obtener_art_home():
+    articulos = controller_articulosweb().obtener_art_home()
+    articulos_serializados = [
+        {'descripcion': item.descripcion,
+         'foto': item.foto,
+         'precio': item.precio,
+         'id': item.id} for item in articulos]
+
+    response = make_response({"articulos": articulos_serializados}, 200)
     response.headers['Content-Type'] = 'application/json'
     return response
