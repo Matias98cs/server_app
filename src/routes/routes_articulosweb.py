@@ -69,3 +69,29 @@ def obtener_art_home():
     response = make_response({"articulos": articulos_serializados}, 200)
     response.headers['Content-Type'] = 'application/json'
     return response
+
+
+@articulos_web_bp.route('/articulosweb-paginado', methods=['GET'])
+def obtener_art_paginado():
+    pagina = request.args.get('pagina', type=int)
+    # cantidad_art = request.args.get('cantidad_art', type=int)
+
+    # if not all([pagina, cantidad_art]):
+    if not pagina:
+        response = make_response(
+            {"msj": 'Debe especificar en los parametros pagina y cantidad_art'}, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+    articulos, total_paginas = controller_articulosweb().obtener_por_pagina(
+        pagina)
+
+    articulos_data = []
+    for art in articulos:
+        at = art.serialize()
+        articulos_data.append(at)
+
+    response = make_response(
+        {"articulos": articulos_data, "total_paginas": total_paginas}, 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
